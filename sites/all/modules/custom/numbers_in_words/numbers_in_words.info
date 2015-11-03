@@ -1,0 +1,6 @@
+name = Numbers in Words
+description = Given a number in numeric form, translates to words.
+package = My First Modules
+core = 7.x
+files[] = numbers_in_words.module
+files[] = numbers_in_words.test

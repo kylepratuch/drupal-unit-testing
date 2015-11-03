@@ -1,0 +1,35 @@
+<?php
+class ClockAngleTestCase extends DrupalUnitTestCase {
+
+  public static function getInfo() {
+    //Note: getInfo() strings should not be translated.
+    return array(
+      'name' => 'Clock Angle unit tests',
+      'description' => 'Test that Clock Angle works properly.',
+      'group' => 'Examples',
+    );
+  }
+
+  function testClockAngle() {
+
+  //English description
+  //displays desired result during test
+  $description = 'Given 12:00, return 0 degrees.';
+
+  //Arrange
+  //create input
+  $hour_input = 12;
+  $minute_input = 0;
+
+  //Act
+  //run the function we're testing with input and store output in $result.
+  $result = get_angle($hour_input, $minute_input);
+
+  //Assert
+  //This time we're using assertEqual
+  //If the result equalts the expected angle, the test passes.
+  //Pass in $description for display
+  $expected_output = 0;
+  $this->assertEqual($result, $expected_output, $description);
+  }
+}

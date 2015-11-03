@@ -1,0 +1,58 @@
+<?php
+
+function numbers_in_words_menu() {
+  $items['numbers_in_words'] = array(
+    'title' => 'Numbers into Words',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('numbers_in_words_form'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['numbers_in_words_success_page'] = array(
+    'title' => 'Success!',
+    'page callback' => 'numbers_in_words_success',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function numbers_in_words_form() {
+  $form['number'] = array(
+    '#title' => 'Number',
+    '#type' => 'textfield',
+    '#description' => t('Please provide a number between zero and one trillion'),
+    '#element_validate' => array('element_validate_integer'),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Translate!',
+  );
+
+  return $form;
+}
+
+function translate_number($number) {
+
+  //Found this handy functionality that is built in to PHP.
+  //Create a new NumberFormatter class ( 'english', use a specific parameter for NumberFormatter )
+  $f = new NumberFormatter('en', NumberFormatter::SPELLOUT);
+  $word = $f->format($number);
+
+  return $word;
+}
+
+function numbers_in_words_form_submit($form, &$form_state) {
+  $number = $form_state['values']['number'];
+
+  $_SESSION['numbers_in_words_output'] = translate_number($number);
+
+  $form_state['redirect'] = 'numbers_in_words_success_page';
+}
+
+function numbers_in_words_success() {
+  $words = $_SESSION['numbers_in_words_output'];
+  return $words;
+}
