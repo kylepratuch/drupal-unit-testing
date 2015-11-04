@@ -46,15 +46,6 @@ function clock_angle_form() {
   return $form;
 }
 
-function clock_angle_form_submit($form, &$form_state) {
-  $hour_hand = $form_state['values']['hour'];
-  $minute_hand = $form_state['values']['minutes'];
-
-  $_SESSION['clock_angle_output'] = get_angle($hour_hand, $minute_hand);
-
-  $form_state['redirect'] = 'clock_angle_success_page';
-}
-
 function get_angle($hour_hand, $minute_hand){
   $hour_degrees = $hour_hand * 30 ;
   $minute_degrees = $minute_hand * 6;
@@ -66,6 +57,15 @@ function get_angle($hour_hand, $minute_hand){
   }
 
   return $angle;
+}
+
+function clock_angle_form_submit($form, &$form_state) {
+  $hour_hand = $form_state['values']['hour'];
+  $minute_hand = $form_state['values']['minutes'];
+
+  $_SESSION['clock_angle_output'] = get_angle($hour_hand, $minute_hand);
+
+  $form_state['redirect'] = 'clock_angle_success_page';
 }
 
 function clock_angle_success(){

@@ -38,8 +38,8 @@ function translate_number($number) {
 
   //Found this handy functionality that is built in to PHP.
   //Create a new NumberFormatter class ( 'english', use a specific parameter for NumberFormatter )
-  $f = new NumberFormatter('en', NumberFormatter::SPELLOUT);
-  $word = $f->format($number);
+  $num_formatter = new NumberFormatter('en', NumberFormatter::SPELLOUT);
+  $word = $num_formatter->format($number);
 
   return $word;
 }
